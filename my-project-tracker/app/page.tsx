@@ -1,13 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { useUserAuth } from "./_utils/auth-context";
 import Link from "next/link";
 
 export default function Page(){
 
-
   // Use the useUserAuth hook to get the user object and the login and logout functions
   const { user, googleSignIn, firebaseSignOut } = useUserAuth();
+
+  console.log(user)
 
   // Handler function for signing in
   async function login(){
@@ -34,7 +36,7 @@ export default function Page(){
           <div>
             <div className="flex flex-col justify-center m-4 w-fit">
               <p className="text-xl font-bold">
-                Welcome! {user.displayName} ({user.email})
+                Welcome! {user.data.displayName} ({user.data.email})
               </p>
                <button className="bg-red-200 p-2 rounded-sm hover:bg-green-300" onClick={logout}>Logout</button> 
             </div>

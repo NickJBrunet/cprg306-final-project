@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "./firebase";
+import { loadUserProfile } from "../_services/user-service";
 
 const AuthContext = createContext();
 
@@ -24,11 +25,11 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(await loadUserProfile(currentUser));
     });
     return () => unsubscribe();
-  }, [user]);
+  }, [auth]);
 
   return (
     <AuthContext.Provider value={{ user, googleSignIn, firebaseSignOut }}>
