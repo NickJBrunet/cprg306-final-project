@@ -19,8 +19,6 @@ export default function Page(){
   const router = useRouter()
   const { user, firebaseSignOut } = useUserAuth()
 
-
-
   function toLogin(){
     router.replace("/")
   }
@@ -59,7 +57,7 @@ export default function Page(){
             </Button>
           </div>
           <ScrollArea className="w-3/4 gap-2">
-            <div className="flex flex-wrap justify-center justify-start gap-4 w-full"> 
+            <div className="flex flex-wrap justify-start gap-4 w-full"> 
               <div className="h-75 w-75 border-2" />
               <div className="h-75 w-75 border-2" />
               <div className="h-75 w-75 border-2" />
