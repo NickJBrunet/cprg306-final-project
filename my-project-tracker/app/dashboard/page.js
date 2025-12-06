@@ -5,15 +5,8 @@ import { useUserAuth } from "../_utils/auth-context";
 import { useRouter } from 'next/navigation';
 import { useEffect } from "react"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 import Header from "@/components/custom/header"
 import Image from "next/image"
-
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
 
 export default function Page(){
   const router = useRouter()
@@ -46,9 +39,9 @@ export default function Page(){
             <Image 
               src={user.data.photoURL}
               alt="Base User Profile Image"
-              height={200}
-              width={200}
-              className="w-[200px] h-[200px] object-contain rounded-full mt-8"
+              height={250}
+              width={250}
+              className="object-contain rounded-lg mt-8"
             />
             <div className="text-center">
               <p>{user.data.displayName}</p>
