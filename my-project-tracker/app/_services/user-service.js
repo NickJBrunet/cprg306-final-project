@@ -11,9 +11,9 @@ export async function loadUserProfile(user) {
 	// first check all users to see if userId = user.uid
 	const usersRef = collection(db, "user");
 
-	const queryUsers = await getDocs(usersRef);
+	const usersDoc = await getDocs(usersRef);
 
-	const usersResult = queryUsers.docs.map(doc => ({
+	const usersResult = usersDoc.docs.map(doc => ({
 		id: doc.id,
 		...doc.data(),
 	}));
@@ -30,7 +30,7 @@ export async function loadUserProfile(user) {
 		// User document exists! no need to create one
 		// return user object with user prop from auth
 		// and the document id for easy reference.
-		if (userQuery != null) {
+		if (userQuery) {
 			
 			console.log(`Found document for: ${user.displayName} with doc id: ${userQuery.id}`)
 

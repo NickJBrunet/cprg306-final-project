@@ -12,14 +12,18 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Image from "next/image"
 
 export default function Login({ handleGoogleLogin }) {
+
+  const providerImageSize = 75
+
   return (
     <Card className="w-full max-w-lg justify-center">
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
         <CardDescription>
-          Enter your email below to login to your account
+          Enter your email and password below
         </CardDescription>
         <CardAction>
           <Button variant="link">Sign Up</Button>
@@ -56,9 +60,25 @@ export default function Login({ handleGoogleLogin }) {
         <Button type="submit" className="w-full">
           Login
         </Button>
-        <Button variant="outline" className="w-full" onClick={handleGoogleLogin}>
-          Login with Google
-        </Button>
+        <CardDescription>Or continue with...</CardDescription>
+        <div className="flex gap-2">
+          <Image
+            src="/google-icon.png"
+            alt="google icon"
+            width={providerImageSize}
+            height={providerImageSize}
+            onClick={handleGoogleLogin}
+            className="border-1 p-2 rounded-md hover:shadow-sm hover:border-2"
+          />
+          <Image
+            src="/github-icon.png"
+            alt="google icon"
+            width={providerImageSize}
+            height={providerImageSize}
+            onClick={handleGoogleLogin}
+            className="border-1 p-2 rounded-md hover:shadow-sm hover:border-2"
+          />
+        </div>
       </CardFooter>
     </Card>
   )
