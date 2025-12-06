@@ -65,7 +65,7 @@ export async function loadUserProfile(user) {
 		}
 
 	} 
-	// otherwise, doesnt exist.
+	// catch errors.
 	catch(error) {
 
 		console.log(error)
