@@ -68,16 +68,16 @@ export default function Login({ handleGoogleLogin }) {
             width={providerImageSize}
             height={providerImageSize}
             onClick={handleGoogleLogin}
-            className="border-1 p-2 rounded-md hover:shadow-sm hover:border-2"
+            className="p-2 rounded-md hover:shadow-sm hover:border-2"
           />
-          <Image
-            src="/github-icon.png"
-            alt="google icon"
-            width={providerImageSize}
-            height={providerImageSize}
-            onClick={handleGoogleLogin}
-            className="border-1 p-2 rounded-md hover:shadow-sm hover:border-2"
-          />
+          {/*<Image*/}
+          {/*  src="/github-icon.png"*/}
+          {/*  alt="google icon"*/}
+          {/*  width={providerImageSize}*/}
+          {/*  height={providerImageSize}*/}
+          {/*  onClick={handleGoogleLogin}*/}
+          {/*  className="border-1 p-2 rounded-md hover:shadow-sm hover:border-2"*/}
+          {/*/>*/}
         </div>
       </CardFooter>
     </Card>
