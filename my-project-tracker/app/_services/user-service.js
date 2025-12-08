@@ -1,6 +1,6 @@
-import {db} from "../_utils/firebase"
+import {db} from "../_utils/firebase-config"
 import {collection, getDocs, addDoc, getDoc, doc, query} from "firebase/firestore"
-import UserProfile from "../_classes/user-profile"
+import UserProfile from "../../classes/user-profile"
 
 /**
 
@@ -65,10 +65,8 @@ export async function loadUserProfile(user) {
 
 			console.log(`Created new document for: ${user.displayName} with doc id: ${newDoc.id}`)
 
-			// Create a new collection for projects
-
 			return new UserProfile(
-				userQuery.id,
+				newDoc.id,
 				user,
 				[]
 			)

@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -13,9 +12,7 @@ import {
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupButton,
   InputGroupInput,
-  InputGroupText,
   InputGroupTextarea,
 } from "@/components/ui/input-group"
 import {
@@ -26,7 +23,10 @@ import {
 
 import { Calendar } from "@/components/ui/calendar"
 import { CardTitle } from "@/components/ui/card"
+import { Spinner } from "@/components/ui/spinner"
+import { useState } from "react"
 import Image from "next/image"
+import Project from "@/classes/project"
 
 /**
 
@@ -41,8 +41,14 @@ import Image from "next/image"
 
 */
 
-export default function ProjectForm({ projectName, setProjectName, projectDescription, setProjectDescription, dueDateRange, setDueDateRange }){
+export default function ProjectForm({ user, projectName, setProjectName, projectDescription, setProjectDescription, dueDateRange, setDueDateRange }){
   
+  /* 
+    Use states 
+  */
+  const [creationLoading, setCreationLoading] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   /* 
     Constants 
   */
@@ -51,9 +57,18 @@ export default function ProjectForm({ projectName, setProjectName, projectDescri
   /* 
     Functions 
   */
-  function handleCreateProject(){
-    // to-do
-    console.log("Creating new project!")
+  async function handleCreateProject(){
+
+    const project = new Project(null, projectName, false, dueDateRange.to, dueDateRange.from, projectDescription, [])
+
+    setCreationLoading(true)
+
+    await user.createNewProject(project)
+
+    setCreationLoading(false)
+    setDialogOpen(false)
+
+    console.log("Created new project! docId: " + project.docId)
   }
 
   function handleProjectName(event){
@@ -81,16 +96,16 @@ export default function ProjectForm({ projectName, setProjectName, projectDescri
   */
 
   return(
-    <Dialog>
+    <Dialog open={dialogOpen}>
       <form onSubmit={handleCreateProject}>
 
         {/* Main button trigger to prompt dialog */}
         <DialogTrigger asChild>
-          <Button>Create New Project</Button>
+          <Button onClick={() => setDialogOpen(true)}>Create New Project</Button>
         </DialogTrigger>
 
         {/* Dialog popup container */}
-        <DialogContent className="sm:max-w-[550px]">
+        <DialogContent className="flex flex-col p-2">
 
           {/* Dialog header container */}
           <DialogHeader>
@@ -125,7 +140,7 @@ export default function ProjectForm({ projectName, setProjectName, projectDescri
                 </Tooltip>
               </InputGroupAddon>
             </InputGroup>
-
+    
             {/* Project description container */}
             <InputGroup className="">
               <InputGroupTextarea 
@@ -179,12 +194,8 @@ export default function ProjectForm({ projectName, setProjectName, projectDescri
 
           {/* Dialog footer for canceling and project creation handling */}
           <DialogFooter>
-            <DialogClose asChild>
-              <Button>Cancel</Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button onClick={handleCreateProject}>Create</Button>
-            </DialogClose>
+            <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleCreateProject}>{creationLoading ? <Spinner/> : <></>}Create</Button>
           </DialogFooter>
         </DialogContent>
       </form>

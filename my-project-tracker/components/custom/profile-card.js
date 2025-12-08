@@ -76,12 +76,12 @@ export default function ProfileCard({user, logout}) {
 
       {/* Card content for new project creation card */}
       <CardContent>        
-        <ProjectCardNew />
+        <ProjectCardNew user={user} />
       </CardContent>
 
       {/* Card footer for application welcome message */}
       <CardFooter>
-        <CardDescription className="text-sm">
+        <CardDescription className="text-sm text-center">
           Welcome <b>{displayName}</b> to <b>My Project Tracker </b>
           create and manage multiple projects tasks to stay on track!
         </CardDescription>

@@ -24,20 +24,20 @@ import ProjectForm from "./project-form"
 
 */
 
-export default function ProjectCardNew() {
+export default function ProjectCardNew({ user }) {
   
   /* 
     Use States 
   */
   const [projectName, setProjectName] = useState("")
   const [projectDescription, setProjectDescription] = useState("")
-  const [dueDateRange, setDueDateRange] = useState({ from: new Date(), to: NaN})
+  const [dueDateRange, setDueDateRange] = useState({ from: new Date(), to: new Date()})
 
   /* 
     Main Component 
   */
   return (
-    <Card className="w-full">   
+    <Card className="w-full text-center">   
 
       {/* Card header for new project description */}
       <CardHeader>
@@ -46,8 +46,9 @@ export default function ProjectCardNew() {
       </CardHeader>
 
       {/* Card content for new project dialog button and form popup */}
-      <CardContent className="flex items-center gap-4">
+      <CardContent className="flex items-center gap-4 mx-auto">
         <ProjectForm 
+          user={user}
           projectName={projectName}
           setProjectName={setProjectName}
           projectDescription={projectDescription}

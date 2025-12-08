@@ -10,6 +10,7 @@ import Image from "next/image"
 import Login from "@/components/custom/login";
 import SignUp from "@/components/custom/sign-up";
 import Header from "@/components/custom/header"
+import LoadingScreen from "@/components/custom/loading-screen"
 
 /**
 
@@ -31,9 +32,9 @@ export default function Page(){
   const [signingUp, setSigningUp] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [creationLoading, setCreationLoading] = useState(false)
 
-  console.log(email)
-  console.log(password)
+  console.log(creationLoading)
 
   function toDashboard(){
     router.push("/dashboard")
@@ -44,11 +45,14 @@ export default function Page(){
 
     try {
       // attempt to login via google
+      setCreationLoading(true)
       await googleSignIn()
+      setCreationLoading(false)
     } 
     
     catch (err) {
       console.log(err)
+      setCreationLoading(false)
     }
   }
 
@@ -57,11 +61,14 @@ export default function Page(){
 
     try {
       // attempt to login via google
+      setCreationLoading(true)
       await githubSignIn()
+      setCreationLoading(false)
     } 
     
     catch (err) {
       console.log(err)
+      setCreationLoading(false)
     }
   }
 
@@ -74,6 +81,7 @@ export default function Page(){
   return (
     <div>
       <Header />
+      <LoadingScreen enabled={creationLoading}/>
       <div className="flex justify-center w-full mt-24 gap-24">
         <div>
           <Image

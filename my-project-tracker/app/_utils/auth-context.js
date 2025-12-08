@@ -8,7 +8,7 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider
 } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth } from "./firebase-config";
 import { loadUserProfile } from "../_services/user-service";
 
 /**
