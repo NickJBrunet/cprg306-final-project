@@ -17,8 +17,6 @@ import ProjectCardNew from "./project-card-new"
 
 export default function ProfileCard({user, logout}) {
 
-  const cardSizePX = 250
-
   const displayName = user.getDisplayName()
   const email = user.getEmail()
   const joinDateDisplay = user.getJoinDateString()
@@ -27,13 +25,11 @@ export default function ProfileCard({user, logout}) {
     logout()
   }
 
-  console.log(user.data.metadata)
-
   return (
     <Card>
       <CardHeader  >
         <hr className="border-1"/>
-        <div className="flex justify-around items-center m-2">
+        <div className="flex justify-around items-center my-2">
           <Image 
             src={user.data.photoURL}
             alt="Base User Profile Image"

@@ -31,11 +31,11 @@ export default function Page(){
   }, [user])
 
   return (
-    <div>
-      {user ?
-      <div>
+    <div> {/* Wrapper Container */}
+      {user ? // if user is not set, there is in error, will auto redirect to login page.
+      <div className="h-max-[85vh]">
         <Header />
-        <div className="flex h-[85vh] m-4 gap-4">
+        <div className="flex m-4 gap-4">
           <div className="w-1/5 h-full">
             <ProfileCard user={user} logout={logout} />
           </div>
