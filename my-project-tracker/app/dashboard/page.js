@@ -1,13 +1,23 @@
 "use client";
 
-import { Button } from "@/components/ui/button"
 import { useUserAuth } from "../_utils/auth-context";
 import { useRouter } from 'next/navigation';
 import { useEffect } from "react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Header from "@/components/custom/header"
-import Image from "next/image"
 import ProfileCard from "@/components/custom/profile-card"
+
+/**
+
+@author Nick Brunet
+@coauthers ...
+@description main page route for user projects
+
+@date_created December 2nd, 2025
+
+@modified December 8th, 2025
+
+*/
 
 export default function Page(){
   const router = useRouter()

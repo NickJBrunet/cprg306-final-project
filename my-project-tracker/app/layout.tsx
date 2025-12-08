@@ -4,6 +4,18 @@ import { AuthContextProvider } from "./_utils/auth-context";
 import "./globals.css";
 import Header from "@/components/custom/header"
 
+/**
+
+@author Pre-Generated
+@coauthers Nick Brunet
+@description Layout for website, 
+
+@date_created December 2nd, 2025
+
+@modified December 6th, 2025
+
+*/
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

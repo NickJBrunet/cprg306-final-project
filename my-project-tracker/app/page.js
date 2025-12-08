@@ -1,12 +1,25 @@
 "use client";
 
+// Non-Default Imports
 import { useUserAuth } from "./_utils/auth-context";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react"
+
+// Default Imports
 import Image from "next/image"
 import Login from "@/components/custom/login";
 import SignUp from "@/components/custom/sign-up";
 import Header from "@/components/custom/header"
+
+/**
+
+@author Nick Brunet
+@coauthers ...
+@description Main route page responsible for handling signup and login to My Project Tracker
+
+@date_created December 2nd, 2025
+
+*/
 
 export default function Page(){
 
@@ -81,8 +94,8 @@ export default function Page(){
           />
         :
           <Login 
-            handleGoogleLogin={googleLogin} 
-            handleGithubLogin={githubLogin} 
+            googleLogin={googleLogin} 
+            githubLogin={githubLogin} 
             setSigningUp={setSigningUp} 
             email={email} 
             setEmail={setEmail} 

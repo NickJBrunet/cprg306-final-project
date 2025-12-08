@@ -11,6 +11,18 @@ import {
 import { auth } from "./firebase";
 import { loadUserProfile } from "../_services/user-service";
 
+/**
+
+@author Hamdy Ibraham
+@coauthers Nick Brunet
+@description authentication context for user authentication
+
+@date_created December 2nd, 2025
+
+@modified December 8th, 2025
+
+*/
+
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {

@@ -2,6 +2,17 @@ import {db} from "../_utils/firebase"
 import {collection, getDocs, addDoc, getDoc, doc, query} from "firebase/firestore"
 import UserProfile from "../_classes/user-profile"
 
+/**
+
+@author Nick Brunet
+@coauthers ...
+@description methods to aid in user services accross the website
+
+@date_created December 2nd, 2025
+
+@modified December 8th, 2025
+
+*/
 
 export async function loadUserProfile(user) {
 	if (!user){

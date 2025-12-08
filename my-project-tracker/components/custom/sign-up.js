@@ -12,10 +12,25 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import Image from "next/image"
+
+/**
+
+@author Nick Brunet
+@coauthers ...
+@description Component for handling signing up onto the website
+
+@date_created December 2nd, 2025
+
+@modified December 8th, 2025
+          - Added comments + Untracked ui changes
+
+*/
 
 export default function Login({ setSigningUp, email, setEmail, password, setPassword }) {
   
+  /*
+    Functions
+  */
   function handleLoggingIn() {
     setSigningUp(false)
   }
@@ -28,8 +43,13 @@ export default function Login({ setSigningUp, email, setEmail, password, setPass
     setPassword(event.target.value)
   }
 
+  /*
+    Main component
+  */
   return (
     <Card className="w-full max-w-lg justify-center">
+
+      {/* Card header for account creation information and back to login button */}
       <CardHeader>
         <CardTitle>Create your new account</CardTitle>
         <CardDescription>
@@ -39,9 +59,13 @@ export default function Login({ setSigningUp, email, setEmail, password, setPass
           <Button variant="link" onClick={handleLoggingIn}>Back to login</Button>
         </CardAction>
       </CardHeader>
+
+      {/* Card content for email and password inputs */}
       <CardContent>
         <form>
           <div className="flex flex-col gap-6">
+
+            {/* Email input container */}
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -53,6 +77,8 @@ export default function Login({ setSigningUp, email, setEmail, password, setPass
                 required
               />
             </div>
+
+            {/* Email input container */}
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
@@ -68,6 +94,8 @@ export default function Login({ setSigningUp, email, setEmail, password, setPass
           </div>
         </form>
       </CardContent>
+      
+      {/* Card footer for sign up button */}
       <CardFooter className="flex-col gap-2">
         <Button type="submit" className="w-full">
           Sign Up
