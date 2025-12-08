@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "My Project Tracker",
-  description: "An app to help students manage all their projects and assignments. Allowing the student to create and manage tasks for each project.",
+  description: "Created by Firaol, Nick & Ahmad",
 };
 
 export default function RootLayout({
