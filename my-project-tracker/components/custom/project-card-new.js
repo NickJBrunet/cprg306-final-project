@@ -46,7 +46,7 @@ export default function ProjectCardNew({ user }) {
       </CardHeader>
 
       {/* Card content for new project dialog button and form popup */}
-      <CardContent className="flex items-center gap-4 mx-auto">
+      <CardContent className="flex justify-center gap-4 w-full">
         <ProjectForm 
           user={user}
           projectName={projectName}

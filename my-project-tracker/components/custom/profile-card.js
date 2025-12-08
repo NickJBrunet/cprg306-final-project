@@ -75,7 +75,7 @@ export default function ProfileCard({user, logout}) {
       </CardHeader>
 
       {/* Card content for new project creation card */}
-      <CardContent>        
+      <CardContent className="w-full">        
         <ProjectCardNew user={user} />
       </CardContent>
 

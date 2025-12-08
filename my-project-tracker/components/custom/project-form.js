@@ -105,7 +105,7 @@ export default function ProjectForm({ user, projectName, setProjectName, project
         </DialogTrigger>
 
         {/* Dialog popup container */}
-        <DialogContent className="flex flex-col p-2">
+        <DialogContent className="p-3 ">
 
           {/* Dialog header container */}
           <DialogHeader>
