@@ -57,8 +57,8 @@ export default function ProfileCard({user, logout}) {
           <Image 
             src={user.data.photoURL}
             alt="Base User Profile Image"
-            height={75}
-            width={75}
+            height={45}
+            width={45}
             className="object-contain rounded-full"
           />
           <div className="flex flex-col">
