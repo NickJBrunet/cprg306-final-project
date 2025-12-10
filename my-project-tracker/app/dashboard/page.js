@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Header from "@/components/custom/header"
 import ProfileCard from "@/components/custom/profile-card"
+import ProjectCardDisplay from "@/components/custom/project-card-display";
 
 /**
 
@@ -49,10 +50,11 @@ export default function Page(){
           <div className="w-1/5 h-full">
             <ProfileCard user={user} logout={logout} />
           </div>
-          <ScrollArea className="w-3/4 gap-2">
-            <div className="flex flex-wrap justify-center justify-start gap-4 w-full"> 
+          {/*<ScrollArea className="w-3/4 gap-2">*/}
+            <div className="flex flex-wrap justify-center justify-start gap-4 w-full">
+                <ProjectCardDisplay userId={user.uid}/>
             </div>
-          </ScrollArea>
+          {/*</ScrollArea>*/}
         </div>
       </div>
       :
