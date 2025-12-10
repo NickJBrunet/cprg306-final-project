@@ -16,6 +16,10 @@ export const columns: ColumnDef<Project>[] = [
     {
         accessorKey: "name",
         header: "Title",
+
+        cell: ({row}) => {
+            return <div className={"hover:underline"}>{row.getValue("name")}</div>
+        }
     },
     {
         accessorKey: "course",
@@ -24,13 +28,44 @@ export const columns: ColumnDef<Project>[] = [
     {
         accessorKey: "dateCreated",
         header: "Date Created",
+
+        cell: ({ row }) => {
+            const date= row.getValue("dateCreated")
+            if (date && typeof date === 'object' && 'seconds' in date) {
+                return new Date(date.seconds * 1000).toLocaleDateString()
+            }
+            return new Date(date as string).toLocaleDateString()
+        }
     },
     {
         accessorKey: "dateDue",
         header: "Due Date",
+
+        cell: ({ row }) => {
+            const date = row.getValue("dateDue")
+            if (date && typeof date === 'object' && 'seconds' in date) {
+                return new Date(date.seconds * 1000).toLocaleDateString()
+            }
+            return new Date(date as string).toLocaleDateString()
+        }
     },
     {
         accessorKey: "isCompleted",
         header: "Status",
+
+        cell: ({ row }) => {
+            const isCompleted = row.getValue("isCompleted") as boolean
+
+            return (
+                <div className="flex items-center gap-2">
+                    <div
+                        className={`h-3 w-3 rounded-full ${
+                            isCompleted ? "bg-green-500" : "bg-red-500"
+                        }`}
+                    />
+                    <p>{isCompleted ? "Done" : "Pending"}</p>
+                </div>
+            )
+        },
     },
 ]

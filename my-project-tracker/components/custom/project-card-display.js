@@ -20,6 +20,17 @@ fit development needs from the following urls:
 2.
 */
 
+/**
+
+ @author Firaol Ahmed
+ @coauthers ...
+ @description methods to aid in user services across the website
+
+ @date_created December 8th, 2025
+
+ @modified December 9th, 2025
+
+ */
 export default function ProjectCardDisplay({ userId }) {
 
     const [projects, setProjects] = useState([]);
@@ -85,7 +96,6 @@ export default function ProjectCardDisplay({ userId }) {
                         <DataTable columns={columns} data={projects}/>
                     )}
                     <div className={"border w-full"}></div>
-
                 </ScrollArea>
             </div>
         </div>

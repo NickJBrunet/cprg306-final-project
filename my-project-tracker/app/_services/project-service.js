@@ -1,5 +1,19 @@
 import {db} from "../_utils/firebase-config"
 import {collection, getDocs} from "firebase/firestore";
+
+
+/**
+
+ @author Firaol Ahmed
+ @coauthers ...
+ @description methods to aid in user services across the website
+
+ @date_created December 8th, 2025
+
+ @modified December 9th, 2025
+
+ */
+
 export async function getProjects(userId) {
     if (!userId) return [];
     try {

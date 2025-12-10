@@ -52,7 +52,7 @@ export default function Page(){
           </div>
           {/*<ScrollArea className="w-3/4 gap-2">*/}
             <div className="flex flex-wrap justify-center justify-start gap-4 w-full">
-                <ProjectCardDisplay userId={user.uid}/>
+                <ProjectCardDisplay userId={user.docId}/>
             </div>
           {/*</ScrollArea>*/}
         </div>
