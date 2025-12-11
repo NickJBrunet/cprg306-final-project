@@ -1,17 +1,17 @@
 "use client";
 
-import {Button} from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
-import {Input} from "@/components/ui/input"
-import {Label} from "@/components/ui/label"
-import Image from "next/image"
-import {Card} from "@/components/ui/card";
-import {ScrollArea} from "@/components/ui/scroll-area";
-import {useState, useEffect} from "react";
-import {columns} from "../../app/project/columns";
-import {DataTable} from "../../app/project/data-table";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Image from "next/image";
+import { Card } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useState, useEffect } from "react";
+import { columns } from "../../app/project/columns";
+import { DataTable } from "../../app/project/data-table";
 
-import {getProjects} from "@/app/_services/project-service";
+import { getProjects } from "@/app/_services/project-service";
 /*
 Components examples were examined and modified to
 fit development needs from the following urls:
@@ -24,80 +24,60 @@ fit development needs from the following urls:
 
  @author Firaol Ahmed
  @coauthers ...
- @description methods to aid in user services across the website
-
+ @description component card for projects information, used on the dashboard
  @date_created December 8th, 2025
 
  @modified December 9th, 2025
 
  */
-export default function ProjectCardDisplay({ userId }) {
+export default function ProjectCardDisplay({ projects = [], handleAdd }) {
+  // const testUserId = "fgD89sGZ8wDVxEf0urpy";
 
-    const [projects, setProjects] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+  // Search Logic
+  const [search, setSearch] = useState("");
 
-    // const effectiveUserId = "fgD89sGZ8wDVxEf0urpy";
+  const filteredProjects = projects.filter((project) => {
+    if (!search) return true;
 
+    const searchLower = search.toLowerCase();
+    const titleMatch = project.name?.toLowerCase().includes(searchLower);
+    const courseMatch = project.course?.toLowerCase().includes(searchLower);
 
-    useEffect(() => {
-        const loadProjects = async () => {
-            if (!userId) {
-                console.log("User Id was not provided");
-                setIsLoading(false);
-                return;
-            }
+    return titleMatch || courseMatch;
+  });
 
-            try {
-                setIsLoading(true);
-                const projects = await getProjects(userId);
-                setProjects(projects);
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setIsLoading(false);
-            }
-        };
+  return (
+    <div className="project-card-display flex min-h-screen w-full flex-col">
+      <div className={"h-3/4 w-full rounded-lg border p-2"}>
+        <div className="mb-2 flex flex-row items-center justify-between gap-2">
+          <p className={"p-2 text-2xl"}>Projects</p>
 
-        loadProjects();
-    }, [userId])
-
-    return (
-        <div className="project-card-display flex flex-col w-full min-h-screen">
-            <div className={"border w-full h-3/4 rounded-lg p-2"}>
-                <div className="flex flex-row gap-2 justify-between items-center mb-2">
-                    <p className={"text-2xl p-2"}>Projects</p>
-
-                    <div className={"flex flex-row gap-2 items-center shrink-0"}>
-                        <div className={"flex flex-row w-fit h-fit p-2 border rounded-lg"}>
-                            <Image
-                                src={"../search.svg"}
-                                alt="Search Bar"
-                                height={28}
-                                width={28}
-                            />
-                            <Input placeholder={"Search by the project title..."}
-                                   className={"ml-2 w-full h-full focus:outline-none"}/>
-                        </div>
-                        <button className={"w-fit h-fit border rounded-md hover:shadow-md"}>
-                            <Image
-                                src={"../filter.svg"}
-                                alt="Filter Button"
-                                height={40}
-                                width={40}
-                            />
-                        </button>
-                    </div>
-
-                </div>
-                <ScrollArea className={"w-full h-[93%] border rounded-lg overflow-hidden flex-1"}>
-                    {isLoading ? (
-                        <div className="p-4 text-center">Projects Loading...</div>
-                    ) : (
-                        <DataTable columns={columns} data={projects}/>
-                    )}
-                    <div className={"border w-full"}></div>
-                </ScrollArea>
+          <div className={"flex shrink-0 flex-row items-center gap-2"}>
+            <div
+              className={"flex h-fit min-w-83 flex-row rounded-lg border p-2"}
+            >
+              <Image
+                src={"../search.svg"}
+                alt="Search Bar"
+                height={28}
+                width={28}
+              />
+              <Input
+                placeholder={"Search by the project title or course..."}
+                className={"ml-2 h-full w-full focus:outline-none"}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
+          </div>
         </div>
-    )
+        <ScrollArea
+          className={"h-[93%] w-full flex-1 overflow-hidden rounded-lg border"}
+        >
+          <DataTable columns={columns} data={filteredProjects} />
+          <div className={"w-full border"}></div>
+        </ScrollArea>
+      </div>
+    </div>
+  );
 }

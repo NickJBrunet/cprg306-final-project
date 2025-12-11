@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
@@ -9,11 +9,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import Image from "next/image"
-import ProjectCardNew from "./project-card-new"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Image from "next/image";
+import ProjectCardNew from "./project-card-new";
 
 /**
 
@@ -28,20 +28,19 @@ import ProjectCardNew from "./project-card-new"
 
 */
 
-export default function ProfileCard({user, logout}) {
-
+export default function ProfileCard({ user, logout, handleAdd }) {
   /* 
     Constants 
   */
-  const displayName = user.getDisplayName()
-  const email = user.getEmail()
-  const joinDateDisplay = user.getJoinDateString()
-  
+  const displayName = user.getDisplayName();
+  const email = user.getEmail();
+  const joinDateDisplay = user.getJoinDateString();
+
   /* 
     Functions 
   */
-  function handleLogout(){
-    logout()
+  function handleLogout() {
+    logout();
   }
 
   /* 
@@ -49,43 +48,48 @@ export default function ProfileCard({user, logout}) {
   */
   return (
     <Card>
-
       {/* Card header for user profile details */}
-      <CardHeader  >
-        <hr className="border-1"/>
-        <div className="flex justify-around items-center my-2">
-          <Image 
+      <CardHeader className={"overflow-auto"}>
+        <hr className="border" />
+        <div className="my-2 flex items-center justify-around">
+          <Image
             src={user.data.photoURL}
             alt="Base User Profile Image"
             height={45}
             width={45}
-            className="object-contain rounded-full"
+            className="rounded-full object-contain"
           />
-          <div className="flex flex-col">
-            <CardDescription><b>Display Name:</b> {displayName}</CardDescription>
-            <CardDescription><b>Email:</b> {email}</CardDescription>
-            <CardDescription><b>Join Date:</b> {joinDateDisplay}</CardDescription>
+          <div className="flex flex-col overflow-auto">
+            <CardDescription>
+              <b>Display Name:</b> {displayName}
+            </CardDescription>
+            <CardDescription>
+              <b>Email:</b> {email}
+            </CardDescription>
+            <CardDescription>
+              <b>Join Date:</b> {joinDateDisplay}
+            </CardDescription>
           </div>
         </div>
-        <hr className="w-2/3 mx-auto"/>
-        <Button onClick={handleLogout} className="w-full my-4">
+        <hr className="mx-auto w-2/3" />
+        <Button onClick={handleLogout} className="mx-auto my-4 w-fit">
           Logout
         </Button>
-        <hr className="border-1"/>
+        <hr className="border" />
       </CardHeader>
 
       {/* Card content for new project creation card */}
-      <CardContent className="w-full">        
-        <ProjectCardNew user={user} />
+      <CardContent className="">
+        <ProjectCardNew user={user} handleAdd={handleAdd} />
       </CardContent>
 
       {/* Card footer for application welcome message */}
       <CardFooter>
-        <CardDescription className="text-sm text-center">
+        <CardDescription className="text-center text-sm">
           Welcome <b>{displayName}</b> to <b>My Project Tracker </b>
           create and manage multiple projects tasks to stay on track!
         </CardDescription>
       </CardFooter>
     </Card>
-  )
+  );
 }

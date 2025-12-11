@@ -1,71 +1,75 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef } from "@tanstack/react-table";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Project = {
-    name: string
-    course: string
-    dateDue: Date
-    dateCreated: Date
-    isCompleted: boolean
-}
+  name: string;
+  course: string;
+  dateDue: Date;
+  dateCreated: Date;
+  isCompleted: boolean;
+};
 
 export const columns: ColumnDef<Project>[] = [
-    {
-        accessorKey: "name",
-        header: "Title",
+  {
+    accessorKey: "name",
+    header: "Title",
 
-        cell: ({row}) => {
-            return <div className={"hover:underline"}>{row.getValue("name")}</div>
-        }
+    cell: ({ row }) => {
+      return (
+        <div className={"cursor-pointer hover:underline"}>
+          {row.getValue("name")}
+        </div>
+      );
     },
-    {
-        accessorKey: "course",
-        header: "Course",
-    },
-    {
-        accessorKey: "dateCreated",
-        header: "Date Created",
+  },
+  {
+    accessorKey: "course",
+    header: "Course",
+  },
+  {
+    accessorKey: "dateCreated",
+    header: "Date Created",
 
-        cell: ({ row }) => {
-            const date= row.getValue("dateCreated")
-            if (date && typeof date === 'object' && 'seconds' in date) {
-                return new Date(date.seconds * 1000).toLocaleDateString()
-            }
-            return new Date(date as string).toLocaleDateString()
-        }
+    cell: ({ row }) => {
+      const date = row.getValue("dateCreated");
+      if (date && typeof date === "object" && "seconds" in date) {
+        return new Date(date.seconds * 1000).toLocaleDateString();
+      }
+      return new Date(date as string).toLocaleDateString();
     },
-    {
-        accessorKey: "dateDue",
-        header: "Due Date",
+  },
+  {
+    accessorKey: "dateDue",
+    header: "Due Date",
 
-        cell: ({ row }) => {
-            const date = row.getValue("dateDue")
-            if (date && typeof date === 'object' && 'seconds' in date) {
-                return new Date(date.seconds * 1000).toLocaleDateString()
-            }
-            return new Date(date as string).toLocaleDateString()
-        }
+    cell: ({ row }) => {
+      const date = row.getValue("dateDue");
+      if (date && typeof date === "object" && "seconds" in date) {
+        return new Date(date.seconds * 1000).toLocaleDateString();
+      }
+      return new Date(date as string).toLocaleDateString();
     },
-    {
-        accessorKey: "isCompleted",
-        header: "Status",
+  },
+  {
+    accessorKey: "isCompleted",
+    header: "Status",
 
-        cell: ({ row }) => {
-            const isCompleted = row.getValue("isCompleted") as boolean
+    cell: ({ row }) => {
+      const isCompleted = row.getValue("isCompleted") as boolean;
 
-            return (
-                <div className="flex items-center gap-2">
-                    <div
-                        className={`h-3 w-3 rounded-full ${
-                            isCompleted ? "bg-green-500" : "bg-red-500"
-                        }`}
-                    />
-                    <p>{isCompleted ? "Done" : "Pending"}</p>
-                </div>
-            )
-        },
+      return (
+        <div className="flex items-center gap-2">
+          <div
+            className={`h-3 w-3 rounded-full ${
+              isCompleted ? "bg-green-500" : "bg-red-500"
+            }`}
+          />
+          <p>{isCompleted ? "Done" : "Pending"}</p>
+        </div>
+      );
     },
-]
+  },
+];
