@@ -1,17 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useState, useEffect } from "react";
-import { columns } from "../../app/project/columns";
-import { DataTable } from "../../app/project/data-table";
+import { useState } from "react";
+import { columns } from "@/app/project/columns";
+import { DataTable } from "@/app/project/data-table";
 
-import { getProjects } from "@/app/_services/project-service";
 /*
 Components examples were examined and modified to
 fit development needs from the following urls:
@@ -27,10 +22,10 @@ fit development needs from the following urls:
  @description component card for projects information, used on the dashboard
  @date_created December 8th, 2025
 
- @modified December 9th, 2025
+ @modified December 10th, 2025
 
  */
-export default function ProjectCardDisplay({ projects = [], handleAdd }) {
+export default function ProjectCardDisplay({ projects = [] }) {
   // const testUserId = "fgD89sGZ8wDVxEf0urpy";
 
   // Search Logic
@@ -72,10 +67,9 @@ export default function ProjectCardDisplay({ projects = [], handleAdd }) {
           </div>
         </div>
         <ScrollArea
-          className={"h-[93%] w-full flex-1 overflow-hidden rounded-lg border"}
+          className={"h-[93%] w-full flex-1 overflow-hidden rounded-lg"}
         >
           <DataTable columns={columns} data={filteredProjects} />
-          <div className={"w-full border"}></div>
         </ScrollArea>
       </div>
     </div>

@@ -83,7 +83,7 @@ export default function Page() {
             </div>
             <div className="flex w-full flex-wrap justify-center gap-4">
               <ProjectStats projects={projects} handleAdd={handleAdd} />
-              <ProjectCardDisplay projects={projects} handleAdd={handleAdd} />
+              <ProjectCardDisplay projects={projects} />
             </div>
           </div>
         </div>

@@ -1,10 +1,12 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Project = {
+  id: string;
   name: string;
   course: string;
   dateDue: Date;
@@ -19,9 +21,12 @@ export const columns: ColumnDef<Project>[] = [
 
     cell: ({ row }) => {
       return (
-        <div className={"cursor-pointer hover:underline"}>
+        <Link
+          href={`/project/${row.original.id}`}
+          className={"cursor-pointer hover:underline"}
+        >
           {row.getValue("name")}
-        </div>
+        </Link>
       );
     },
   },
@@ -67,7 +72,7 @@ export const columns: ColumnDef<Project>[] = [
               isCompleted ? "bg-green-500" : "bg-red-500"
             }`}
           />
-          <p>{isCompleted ? "Done" : "Pending"}</p>
+          <p>{isCompleted ? "Done" : "In-Progress"}</p>
         </div>
       );
     },
