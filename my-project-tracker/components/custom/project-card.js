@@ -20,7 +20,6 @@ const formatDate = (dateNum) => {
   });
 };
 
-// Change to show availability tasks
 const tasks = [];
 export default function ProjectCard({ project }) {
   return (

@@ -12,16 +12,12 @@ import { getProjects } from "@/app/_services/project-service";
 import ProjectStats from "@/components/custom/projectstats";
 
 /**
-
-@author Nick Brunet
-@coauthers Firaol Ahmed
-@description main page route for user projects. Fetches data for the stats and table components.
-
-@date_created December 2nd, 2025
-
-@modified December 8th, 2025
-
-*/
+ * @author Nick Brunet
+ * @coauthers Firaol Ahmed
+ * @description main page route for user projects. Fetches data for the stats and table components.
+ * @date_created December 2nd, 2025
+ * @modified December 8th, 2025
+ */
 
 export default function Page() {
   const router = useRouter();
@@ -72,16 +68,16 @@ export default function Page() {
 
   return (
     <div>
-      {" "}
       {/* Wrapper Container */}
-      {user ? ( // if user is not set, there is in error, will auto redirect to login page.
-        <div className="h-max-[85vh]">
+      {user ? (
+        <div className="min-h-screen">
           <Header />
-          <div className="m-4 flex gap-4">
-            <div className="h-full w-1/5">
+          <div className="m-4 flex flex-col gap-4 md:flex-row">
+            <div className="w-full md:w-1/4 lg:w-1/5">
               <ProfileCard user={user} logout={logout} handleAdd={handleAdd} />
             </div>
-            <div className="flex w-full flex-wrap justify-center gap-4">
+
+            <div className="flex flex-1 flex-wrap justify-center gap-4">
               <ProjectStats projects={projects} handleAdd={handleAdd} />
               <ProjectCardDisplay projects={projects} />
             </div>

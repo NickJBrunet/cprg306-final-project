@@ -7,18 +7,12 @@ import { getProjectByDocId } from "@/app/_services/project-service";
 import ProjectCard from "@/components/custom/project-card";
 import Header from "@/components/custom/header";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
 import Image from "next/image";
-import { DataTable } from "../data-table";
-import { columns } from "../columns";
-import ProfileCard from "../../../components/custom/profile-card";
+import ProfileCard from "@/components/custom/profile-card"; // Adjusted path to match standard
+
+// Note: DataTable and columns were imported but not used in your return statement.
+// I have left them out to keep this clean, but ensure they are inside ProjectCard if needed.
 
 export default function ProjectPage({ params }) {
   const resolvedParams = use(params);
@@ -74,7 +68,6 @@ export default function ProjectPage({ params }) {
           alt="Description of my image"
           width={200}
           height={200}
-          objectFit="contain"
         />
         <Spinner />
         <p className="animate-pulse text-sm text-gray-500">
@@ -86,11 +79,11 @@ export default function ProjectPage({ params }) {
 
   if (!project) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4">
+      <div className="flex h-screen flex-col items-center justify-center gap-4">
         <p className="text-xl font-semibold">Project not found</p>
         <p className="text-gray-500">
           Looking for ID:{" "}
-          <span className="rounded bg-gray-100">{projectId}</span>
+          <span className="rounded bg-gray-100 px-2 py-1">{projectId}</span>
         </p>
         <Button onClick={() => router.back()}>Go Back</Button>
       </div>
@@ -98,19 +91,25 @@ export default function ProjectPage({ params }) {
   }
 
   return (
-    <div className="h-max-[85vh] min-h-screen">
+    <div className="min-h-screen">
       <Header />
-      <div className="m-3 w-full">
-        <Button variant="outline" className="" onClick={() => router.back()}>
-          <span>←</span> Back to Projects
-        </Button>
-      </div>
-      <div className={"m-4 flex gap-4"}>
-        <div className="h-full w-1/5">
-          <ProfileCard user={user} />
+
+      <div className="p-4">
+        <div className="mb-4">
+          <Button variant="outline" onClick={() => router.back()}>
+            <span>←</span> Back to Projects
+          </Button>
         </div>
-        <div className="w-full gap-4">
-          <ProjectCard project={project} />
+
+        <div className="flex flex-col gap-6 md:flex-row">
+          <div className="w-full md:w-1/4 lg:w-1/5">
+            <ProfileCard user={user} />
+          </div>
+
+          {/* Project Card Area */}
+          <div className="flex-1">
+            <ProjectCard project={project} />
+          </div>
         </div>
       </div>
     </div>
