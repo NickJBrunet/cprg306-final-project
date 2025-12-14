@@ -76,16 +76,14 @@ export default function TaskForm({
 
 		setCreationLoading(true);
 
-		await user.createNewTask(project, task);
+		await user.createNewTask(project, task)
 
 		setCreationLoading(false);
 		setDialogOpen(false);
 
 		console.log("Created new task! docId: " + task.docId);
 
-		if (handleAddTask) {
-			handleAddTask(task);
-		}
+		handleAddTask(task.getFirestoreData());
 	}
 
 	function handleTaskName(event) {

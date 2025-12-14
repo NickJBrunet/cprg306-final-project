@@ -8,6 +8,7 @@ import { Switch } from "@/components/ui/switch";
 export type Task = {
   id: string;
   name: string;
+  description: string;
   dateDue: Date;
   dateCreated: Date;
   isCompleted: boolean;
@@ -17,6 +18,10 @@ export const taskColumns: ColumnDef<Task>[] = [
   {
     accessorKey: "name",
     header: "Title",
+  },
+  {
+    accessorKey: "description",
+    header: "Description",
   },
   {
     accessorKey: "dateCreated",

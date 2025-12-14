@@ -80,7 +80,8 @@ export default function ProjectPage({ params }) {
   }
 
   function handleAddTask(newTask) {
-    setTasks((prevTask) => [...prevTask, newTask]);
+    console.log([...tasks, newTask])
+    handleSetTasks([...tasks, newTask])
   }
 
   function allTasksCompleted(tasks) {

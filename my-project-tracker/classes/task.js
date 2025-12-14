@@ -29,6 +29,7 @@ export default class Task {
     }
     getFirestoreData() {
         return {
+            id: this.docId,
             name: this.name,
             description: this.description,
             dateDue: this.dateDue.getTime(),
