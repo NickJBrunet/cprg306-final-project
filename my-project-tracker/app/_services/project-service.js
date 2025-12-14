@@ -5,7 +5,7 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
  @author Firaol Ahmed
  @coauthers ...
- @description methods to aid in user services across the website
+ @description methods to aid in projects services across the website
 
  @date_created December 8th, 2025
 
@@ -16,10 +16,10 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 export async function getProjects(userId) {
   if (!userId) return [];
   try {
-    const projectRef = collection(db, "user", userId, "projects");
-    const projectDoc = await getDocs(projectRef);
+    const projectsRef = collection(db, "user", userId, "projects");
+    const projectsDoc = await getDocs(projectsRef);
 
-    return projectDoc.docs.map((doc) => ({
+    return projectsDoc.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
