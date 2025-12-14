@@ -8,7 +8,7 @@ import Link from "next/link";
 export type Project = {
   id: string;
   name: string;
-  course: string;
+  courseName: string;
   dateDue: Date;
   dateCreated: Date;
   isCompleted: boolean;
@@ -31,8 +31,16 @@ export const columns: ColumnDef<Project>[] = [
     },
   },
   {
-    accessorKey: "course",
+    accessorKey: "courseName",
     header: "Course",
+
+    cell: ({ row }) => {
+      return (
+        <div>
+          {row.getValue("courseName")}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "dateCreated",

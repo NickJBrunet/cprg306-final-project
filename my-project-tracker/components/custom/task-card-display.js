@@ -6,6 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
 
 import { updateTaskStatus } from "../../app/_services/task-services";
+import { updateProjectStatus } from "../../app/_services/project-service";
 
 import { taskColumns } from "@/app/project/[docId]/task-columns";
 import { DataTable } from "@/app/project/data-table";
@@ -25,20 +26,18 @@ fit development needs from the following urls:
  @description component card for tasks information, used on the dashboard
  @date_created December 12th, 2025
 
- @modified December 10th, 2025
+ @modified December 14th, 2025
 
  */
-export default function TaskCardDisplay({ tasks = [], user, projectId }) {
+export default function TaskCardDisplay({ tasks, setTasks, user, projectId }) {
   // const testUserId = "fgD89sGZ8wDVxEf0urpy";
 
-  const [locTasks, setLocTasks] = useState(tasks);
-
   useEffect(() => {
-    if (tasks) setLocTasks(tasks);
+    if (tasks) setTasks(tasks);
   }, [tasks]);
 
   const handleUpdateStatus = async(task, newStatus) => {
-    setLocTasks((prev) =>
+    setTasks((prev) =>
       prev.map((t) => (t.id === task.id ? { ...t, isCompleted: newStatus } : t))
     )
 
@@ -47,17 +46,18 @@ export default function TaskCardDisplay({ tasks = [], user, projectId }) {
 
       if (!success) {
         console.log("Update unsuccessful")
-        setLocTasks((prev) =>
+        setTasks((prev) =>
           prev.map((t) => (t.id === task.id ? { ...t, isCompleted: !newStatus } : t))
         );
       }
     }
-  };
+
+  }
 
   // Search Logic
   const [search, setSearch] = useState("");
 
-  const filteredTasks = locTasks.filter((project) => {
+  const filteredTasks = tasks.filter((project) => {
     if (!search) return true;
     const searchLower = search.toLowerCase();
     const titleMatch = project.name?.toLowerCase().includes(searchLower);

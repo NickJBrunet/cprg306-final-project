@@ -46,6 +46,8 @@ export default function ProjectForm({
   setProjectName,
   projectDescription,
   setProjectDescription,
+  courseName,
+  setCourseName,
   dueDateRange,
   setDueDateRange,
   handleAdd,
@@ -71,6 +73,7 @@ export default function ProjectForm({
       null,
       projectName,
       false,
+      courseName,
       dueDateRange.to,
       dueDateRange.from,
       projectDescription,
@@ -97,6 +100,10 @@ export default function ProjectForm({
 
   function handleProjectDescription(event) {
     setProjectDescription(event.target.value);
+  }
+
+  function handleCourseName(event) {
+    setCourseName(event.target.value);
   }
 
   function handleDateSelect(dateRange) {
@@ -189,6 +196,17 @@ export default function ProjectForm({
                   <TooltipContent>Description Length: 10-150</TooltipContent>
                 </Tooltip>
               </InputGroupAddon>
+            </InputGroup>
+
+            {/* Container for handling course name input */}
+            <InputGroup>
+
+              <InputGroupTextarea
+                placeholder="Course name..."
+                maxLength={15}
+                value={courseName}
+                onChange={handleCourseName}
+              />
             </InputGroup>
 
             {/* Timeline container: select project timeline approximation */}

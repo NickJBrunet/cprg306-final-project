@@ -99,7 +99,7 @@ export default function TaskForm({
 	function handleDateSelect(dateRange) {
 		setDueDateRange({
 			from: new Date(),
-			to: dateRange.to,
+			to: dateRange.to || new Date(),
 		});
 	}
 

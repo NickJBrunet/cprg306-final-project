@@ -9,7 +9,7 @@ import ProfileCard from "@/components/custom/profile-card";
 import ProjectCardDisplay from "@/components/custom/project-card-display";
 
 import { getProjects } from "@/app/_services/project-service";
-import ProjectStats from "@/components/custom/projectstats";
+import ProjectStats from "@/components/custom/project-stats";
 
 /**
  * @author Nick Brunet
@@ -36,7 +36,7 @@ export default function Page() {
   }
 
   function handleAddProject(newProject) {
-    setProjects((prevProject) => [...prevProject, newProject]);
+    setProjects((prevProjects) => [...prevProjects, newProject]);
   };
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function Page() {
             </div>
 
             <div className="flex flex-1 flex-wrap justify-center gap-4">
-              <ProjectStats projects={projects} handleAddProject={handleAddProject} />
+              <ProjectStats projects={projects} />
               <ProjectCardDisplay projects={projects} />
             </div>
           </div>

@@ -11,10 +11,11 @@
 */
 
 export default class Project {
-    constructor (docId, name, isCompleted, dateDue, dateCreated, description, tasks) {
+    constructor (docId, name, isCompleted, courseName, dateDue, dateCreated, description, tasks) {
         this.docId = docId;
         this.name = name;
         this.isCompleted = isCompleted ? isCompleted : false;
+        this.courseName = courseName ? courseName : ""
         this.dateDue = dateDue ? dateDue : new Date()
         this.dateCreated = dateCreated ? dateCreated : new Date()
         this.description = description ? description : ""
@@ -33,6 +34,7 @@ export default class Project {
         return {
             name: this.name,
             description: this.description,
+            courseName: this.courseName,
             dateDue: this.dateDue.getTime(),
             dateCreated: this.dateCreated.getTime(),
             isCompleted: this.isCompleted,

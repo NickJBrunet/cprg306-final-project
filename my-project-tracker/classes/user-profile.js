@@ -69,14 +69,13 @@ export default class UserProfile {
 
         return projectDoc.exists() ? projectDoc : null
     }
-    async createNewTask(project, task) { // takes project class object as input
+    async createNewTask(project, task) { // takes project class object & task class object as input
 
         const taskCollection = this.getTaskCollection(project.id)
         const taskDocRef = await addDoc(taskCollection, task.getFirestoreData())
         const taskDoc = await getDoc(taskDocRef)
 
         task.setDocId(taskDoc.id)
-        // this.projects.tasks.push(task) doesnt use project class object
 
         return taskDoc.exists() ? taskDoc : null
     }

@@ -30,6 +30,7 @@ export default function ProjectCardNew({ user, handleAddProject }) {
   */
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
+  const [courseName, setCourseName] = useState("");
   const [dueDateRange, setDueDateRange] = useState({
     from: new Date(),
     to: new Date(),
@@ -57,6 +58,8 @@ export default function ProjectCardNew({ user, handleAddProject }) {
           setProjectName={setProjectName}
           projectDescription={projectDescription}
           setProjectDescription={setProjectDescription}
+          courseName={courseName}
+          setCourseName={setCourseName}
           dueDateRange={dueDateRange}
           setDueDateRange={setDueDateRange}
           handleAdd={handleAddProject}

@@ -11,8 +11,9 @@ import Image from "next/image";
 import ProfileCard from "@/components/custom/profile-card";
 
 import { getTasks } from "../../_services/task-services";
-import ProjectStats from "../../../components/custom/projectstats";
+import ProjectStats from "../../../components/custom/project-stats";
 import TaskCardDisplay from "../../../components/custom/task-card-display";
+import { updateProjectStatus } from "@/app/_services/project-service"
 
 export default function ProjectPage({ params }) {
   const resolvedParams = use(params);
@@ -51,8 +52,9 @@ export default function ProjectPage({ params }) {
       try {
         const projectData = await getProjectByDocId(user.docId, projectId);
         const tasksData = await getTasks(user.docId, projectId)
+
         setProject(projectData);
-        setTasks(tasksData);
+        handleSetTasks(tasksData);
       } catch (error) {
         console.log(error);
       } finally {
@@ -63,8 +65,31 @@ export default function ProjectPage({ params }) {
     loadProject();
   }, [user, projectId]);
 
+  async function handleSetTasks(updatedTasks) {
+    // console.log(updatedTasks);
+    setTasks(updatedTasks);
+    try {
+
+      if (allTasksCompleted(updatedTasks)) {
+        await updateProjectStatus(user.docId, projectId, true);
+      } else {
+        await updateProjectStatus(user.docId, projectId, false);
+      }
+    } catch (error) {
+    }
+  }
+
   function handleAddTask(newTask) {
     setTasks((prevTask) => [...prevTask, newTask]);
+  }
+
+  function allTasksCompleted(tasks) {
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].isCompleted === false) {
+        return false;
+      }
+    }
+    return true;
   }
 
   if (isLoading) {
@@ -119,8 +144,8 @@ export default function ProjectPage({ params }) {
 
           {/* Tasks Card Area */}
           <div className="flex-1">
-            <ProjectStats tasks={tasks} handleAdd={handleAddTask}/>
-            <TaskCardDisplay tasks={tasks} user={user} projectId={projectId}/>
+            <ProjectStats tasks={tasks}/>
+            <TaskCardDisplay tasks={tasks} setTasks={handleSetTasks} user={user} projectId={projectId}/>
           </div>
         </div>
       </div>

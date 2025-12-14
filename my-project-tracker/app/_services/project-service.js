@@ -1,5 +1,5 @@
 import { db } from "../_utils/firebase-config";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, updateDoc, getDoc, getDocs } from "firebase/firestore";
 
 /**
 
@@ -51,5 +51,20 @@ export async function getProjectByDocId(userId, projectId) {
   } catch (error) {
     console.log(error);
     return null;
+  }
+}
+
+
+export async function updateProjectStatus(userId, projectId, newStatus) {
+  try {
+    const projectRef = doc(db,"user", userId, "projects", projectId);
+
+    await updateDoc(projectRef, {
+      isCompleted: newStatus
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    // return false
   }
 }

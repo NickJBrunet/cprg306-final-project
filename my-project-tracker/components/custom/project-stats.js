@@ -1,10 +1,16 @@
-import { CheckCircle2, Circle, Clock } from "lucide-react";
 
-export default function ProjectStats({ projects = [], tasks = [], handleAdd }) {
+import { CheckCircle2, Circle, Clock } from "lucide-react";
+import { getTasks } from "@/app/_services/task-services";
+
+export default function ProjectStats({ projects = [], tasks = [] }) {
+
   const totalProjects = projects.length || tasks.length;
+
   const completedProjects =
-    projects.filter((p) => p.isCompleted).length ||
-    tasks.filter((p) => p.isCompleted).length;
+      projects.filter((p) => p.isCompleted).length
+    ||
+      tasks.filter((p) => p.isCompleted).length;
+
   const incompleteProjects = totalProjects - completedProjects;
 
   return (
