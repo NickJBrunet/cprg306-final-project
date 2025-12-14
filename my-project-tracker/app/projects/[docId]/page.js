@@ -9,11 +9,7 @@ import Header from "@/components/custom/header";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import Image from "next/image";
-import ProfileCard from "@/components/custom/profile-card"; // Adjusted path to match standard
-
-// Note: DataTable and columns were imported but not used in your return statement.
-// I have left them out to keep this clean, but ensure they are inside ProjectCard if needed.
-
+import ProfileCard from "@/components/custom/profile-card";
 export default function ProjectPage({ params }) {
   const resolvedParams = use(params);
   const projectId = resolvedParams.docId;
@@ -26,7 +22,7 @@ export default function ProjectPage({ params }) {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      console.log("Redirecting to login...");
+      console.log("Back to Login Page...");
       router.push("/");
     }
   }, [user, isLoading, router]);
@@ -81,10 +77,6 @@ export default function ProjectPage({ params }) {
     return (
       <div className="flex h-screen flex-col items-center justify-center gap-4">
         <p className="text-xl font-semibold">Project not found</p>
-        <p className="text-gray-500">
-          Looking for ID:{" "}
-          <span className="rounded bg-gray-100 px-2 py-1">{projectId}</span>
-        </p>
         <Button onClick={() => router.back()}>Go Back</Button>
       </div>
     );

@@ -4,8 +4,8 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
-import { columns } from "@/app/project/columns";
-import { DataTable } from "@/app/project/data-table";
+import { columns } from "@/app/projects/columns";
+import { DataTable } from "@/app/projects/data-table";
 
 /*
 Components examples were examined and modified to

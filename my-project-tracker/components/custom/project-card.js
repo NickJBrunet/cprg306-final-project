@@ -7,8 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { DataTable } from "../../app/project/data-table";
-import { columns } from "../../app/project/columns";
+import { DataTable } from "../../app/projects/data-table";
+import { columns } from "../../app/projects/columns";
 import ProfileCard from "./profile-card";
 
 const formatDate = (dateNum) => {

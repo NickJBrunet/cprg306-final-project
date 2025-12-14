@@ -22,7 +22,7 @@ export const columns: ColumnDef<Project>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/project/${row.original.id}`}
+          href={`/projects/${row.original.id}`}
           className={"cursor-pointer hover:underline"}
         >
           {row.getValue("name")}
