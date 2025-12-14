@@ -24,7 +24,7 @@ import ProjectForm from "./project-form";
 
 */
 
-export default function ProjectCardNew({ user, handleAdd }) {
+export default function ProjectCardNew({ user, handleAddProject }) {
   /* 
     Use States 
   */
@@ -59,7 +59,7 @@ export default function ProjectCardNew({ user, handleAdd }) {
           setProjectDescription={setProjectDescription}
           dueDateRange={dueDateRange}
           setDueDateRange={setDueDateRange}
-          handleAdd={handleAdd}
+          handleAdd={handleAddProject}
         />
       </CardContent>
     </Card>

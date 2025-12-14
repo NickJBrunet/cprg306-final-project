@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import ProjectCardNew from "./project-card-new";
+import TaskCardNew from "./task-card-new";
 
 /**
 
@@ -28,20 +29,13 @@ import ProjectCardNew from "./project-card-new";
 
 */
 
-export default function ProfileCard({ user, logout, handleAdd }) {
+export default function ProfileCard({ user, logout, handleAddProject, handleAddTask, project }) {
   /* 
     Constants 
   */
   const displayName = user.getDisplayName();
   const email = user.getEmail();
   const joinDateDisplay = user.getJoinDateString();
-
-  /* 
-    Functions 
-  */
-  function handleLogout() {
-    logout();
-  }
 
   /* 
     Main component 
@@ -71,16 +65,26 @@ export default function ProfileCard({ user, logout, handleAdd }) {
             </CardDescription>
           </div>
         </div>
-        <hr className="mx-auto w-2/3" />
-        <Button onClick={handleLogout} className="mx-auto my-4 w-fit">
-          Logout
-        </Button>
+        {logout ?
+          <div className="flex align-center flex-col">
+            <hr className="mx-auto w-2/3" />
+            <Button onClick={() => logout()} className="mx-auto my-4 w-fit">
+              Logout
+            </Button>
+          </div>
+        : 
+          null
+        }
         <hr className="border" />
       </CardHeader>
 
       {/* Card content for new project creation card */}
       <CardContent className="">
-        <ProjectCardNew user={user} handleAdd={handleAdd} />
+        {project ?
+          <TaskCardNew user={user} handleAddTask={handleAddTask} />
+        :
+          <ProjectCardNew user={user} handleAddProject={handleAddProject} />
+        }
       </CardContent>
 
       {/* Card footer for application welcome message */}

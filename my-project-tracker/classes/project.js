@@ -25,6 +25,10 @@ export default class Project {
         this.docId = newDocId;
     }
 
+    getDocId(){
+        return this.docId;
+    }
+
     getFirestoreData(){
         return {
             name: this.name,

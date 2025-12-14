@@ -35,7 +35,7 @@ export default function Page() {
     await firebaseSignOut();
   }
 
-  const handleAdd = (newProject) => {
+  function handleAddProject(newProject) {
     setProjects((prevProject) => [...prevProject, newProject]);
   };
 
@@ -74,11 +74,17 @@ export default function Page() {
           <Header />
           <div className="m-4 flex flex-col gap-4 md:flex-row">
             <div className="w-full md:w-1/4 lg:w-1/5">
-              <ProfileCard user={user} logout={logout} handleAdd={handleAdd} />
+              <ProfileCard 
+                user={user} 
+                logout={logout} 
+                handleAddProject={handleAddProject} 
+                handleAddTask={null} 
+                project={null}
+              />
             </div>
 
             <div className="flex flex-1 flex-wrap justify-center gap-4">
-              <ProjectStats projects={projects} handleAdd={handleAdd} />
+              <ProjectStats projects={projects} handleAddProject={handleAddProject} />
               <ProjectCardDisplay projects={projects} />
             </div>
           </div>

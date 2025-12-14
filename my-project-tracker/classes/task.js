@@ -14,9 +14,9 @@ export default class Task {
     constructor (docId, name, isCompleted, dateDue, dateCreated, description) {
         this.docId = docId;
         this.name = name;
-        this.isCompleted = isCompleted;
-        this.dateDue = dateDue;
-        this.dateCreated = dateCreated;
-        this.description = description;
+        this.isCompleted = isCompleted ? isCompleted : false;
+        this.dateDue = dateDue ? dateDue : new Date()
+        this.dateCreated = dateCreated ? dateCreated : new Date()
+        this.description = description ? description : ""
     }
 }

@@ -60,6 +60,10 @@ export default function ProjectPage({ params }) {
     loadProject();
   }, [user, projectId]);
 
+  function handleAddTask(newTask) {
+
+  }
+
   if (isLoading) {
     return (
       <div className="flex h-screen flex-col items-center justify-center gap-4">
@@ -103,7 +107,11 @@ export default function ProjectPage({ params }) {
 
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="w-full md:w-1/4 lg:w-1/5">
-            <ProfileCard user={user} />
+            <ProfileCard 
+              user={user} 
+              handleAddProject={null}
+              handleAddTask={handleAddTask} 
+              project={project}/>
           </div>
 
           {/* Project Card Area */}
