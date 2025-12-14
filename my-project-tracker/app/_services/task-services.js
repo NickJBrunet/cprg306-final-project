@@ -1,5 +1,5 @@
 import { db } from "../_utils/firebase-config";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
 /**
 
@@ -36,35 +36,16 @@ export async function getTasks(userId, projectId) {
   }
 }
 
-export async function getTasksByDocId(userId, projectId, taskId) {
-  if (!userId || !projectId || !taskId) {
-    console.log("missing id");
-    return null;
-  }
-
+export async function updateTaskStatus(userId, projectId, taskId, newStatus) {
   try {
-    const taskRef = doc(
-      db,
-      "user",
-      userId,
-      "projects",
-      projectId,
-      "tasks",
-      taskId,
-    );
-    const taskDoc = await getDoc(taskRef);
+    const taskRef = doc(db,"user", userId, "projects", projectId, "tasks", taskId);
 
-    if (taskDoc.exists()) {
-      return {
-        id: taskDoc.id,
-        ...taskDoc.data(),
-      };
-    } else {
-      console.log("No task with this docId");
-      return null;
-    }
+    await updateDoc(taskRef, {
+      isCompleted: newStatus
+    });
+    return true;
   } catch (error) {
     console.log(error);
-    return null;
+    // return false
   }
 }
