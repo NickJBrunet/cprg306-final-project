@@ -4,15 +4,15 @@ import { useUserAuth } from "@/app/_utils/auth-context";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, use } from "react";
 import { getProjectByDocId } from "@/app/_services/project-service";
-import ProjectCard from "@/components/custom/project-card";
 import Header from "@/components/custom/header";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import Image from "next/image";
-import ProfileCard from "@/components/custom/profile-card"; // Adjusted path to match standard
+import ProfileCard from "@/components/custom/profile-card";
 
-// Note: DataTable and columns were imported but not used in your return statement.
-// I have left them out to keep this clean, but ensure they are inside ProjectCard if needed.
+import { getTasks } from "../../_services/task-services";
+import ProjectStats from "../../../components/custom/projectstats";
+import TaskCardDisplay from "../../../components/custom/task-card-display";
 
 export default function ProjectPage({ params }) {
   const resolvedParams = use(params);
@@ -22,6 +22,7 @@ export default function ProjectPage({ params }) {
   const router = useRouter();
 
   const [project, setProject] = useState(null);
+  const [tasks, setTasks] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -48,8 +49,10 @@ export default function ProjectPage({ params }) {
       }
 
       try {
-        const data = await getProjectByDocId(user.docId, projectId);
-        setProject(data);
+        const projectData = await getProjectByDocId(user.docId, projectId);
+        const tasksData = await getTasks(user.docId, projectId)
+        setProject(projectData);
+        setTasks(tasksData);
       } catch (error) {
         console.log(error);
       } finally {
@@ -61,7 +64,7 @@ export default function ProjectPage({ params }) {
   }, [user, projectId]);
 
   function handleAddTask(newTask) {
-
+    setTasks((prevTask) => [...prevTask, newTask]);
   }
 
   if (isLoading) {
@@ -101,22 +104,23 @@ export default function ProjectPage({ params }) {
       <div className="p-4">
         <div className="mb-4">
           <Button variant="outline" onClick={() => router.back()}>
-            <span>←</span> Back to Projects
+            <span>←</span> Back to Home
           </Button>
         </div>
 
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="w-full md:w-1/4 lg:w-1/5">
-            <ProfileCard 
-              user={user} 
+            <ProfileCard
+              user={user}
               handleAddProject={null}
-              handleAddTask={handleAddTask} 
+              handleAddTask={handleAddTask}
               project={project}/>
           </div>
 
-          {/* Project Card Area */}
+          {/* Tasks Card Area */}
           <div className="flex-1">
-            <ProjectCard project={project} />
+            <ProjectStats tasks={tasks} handleAdd={handleAddTask}/>
+            <TaskCardDisplay tasks={tasks} user={user} projectId={projectId}/>
           </div>
         </div>
       </div>

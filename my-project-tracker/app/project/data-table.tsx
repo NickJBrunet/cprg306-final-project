@@ -5,6 +5,7 @@ import {
     flexRender,
     getCoreRowModel,
     useReactTable,
+    RowData,
 } from "@tanstack/react-table"
 
 import {
@@ -16,19 +17,30 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
+declare module "@tanstack/react-table" {
+    interface TableMeta<TData extends RowData> {
+        updateStatus?: (task: TData, status: boolean) => void;
+    }
+}
+
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    meta?: {
+        updateStatus: (task: TData, status: boolean) => void;
+    }
 }
 
 export function DataTable<TData, TValue>({
                                              columns,
                                              data,
+                                             meta,
                                          }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        meta,
     })
 
     return (
