@@ -38,7 +38,7 @@ import Task from "@/classes/task";
 */
 
 export default function TaskForm({
-	project,
+	user,
 	taskName,
 	setTaskName,
 	taskDescription,
@@ -46,6 +46,7 @@ export default function TaskForm({
 	dueDateRange,
 	setDueDateRange,
 	handleAddTask,
+	project
 }) {
 	/* 
 	  Use states 
@@ -75,14 +76,14 @@ export default function TaskForm({
 
 		setCreationLoading(true);
 
-		await project.createNewTask(task);
+		await user.createNewTask(project, task);
 
 		setCreationLoading(false);
 		setDialogOpen(false);
 
 		console.log("Created new task! docId: " + task.docId);
 
-		if (handleAdd) {
+		if (handleAddTask) {
 			handleAddTask(task);
 		}
 	}

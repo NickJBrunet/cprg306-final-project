@@ -21,7 +21,7 @@ import TaskForm from "./task-form";
 
 */
 
-export default function TaskCardNew({ user, handleAddTask }) {
+export default function TaskCardNew({ user, handleAddTask, project }) {
 	/* 
 	  Use States 
 	*/
@@ -56,6 +56,7 @@ export default function TaskCardNew({ user, handleAddTask }) {
 					dueDateRange={dueDateRange}
 					setDueDateRange={setDueDateRange}
 					handleAddTask={handleAddTask}
+					project={project}
 				/>
 			</CardContent>
 		</Card>

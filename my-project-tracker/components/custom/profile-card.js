@@ -81,7 +81,7 @@ export default function ProfileCard({ user, logout, handleAddProject, handleAddT
       {/* Card content for new project creation card */}
       <CardContent className="">
         {project ?
-          <TaskCardNew user={user} handleAddTask={handleAddTask} />
+          <TaskCardNew user={user} handleAddTask={handleAddTask} project={project} />
         :
           <ProjectCardNew user={user} handleAddProject={handleAddProject} />
         }

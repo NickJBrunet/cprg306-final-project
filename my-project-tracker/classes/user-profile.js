@@ -19,7 +19,7 @@ export default class UserProfile {
         this.data = data;
 		this.docId = docId;
 		this.projects = projects;
-        this.loadProjects()
+        // this.loadProjects()
     }
 
     /*
@@ -30,8 +30,11 @@ export default class UserProfile {
         return userDoc.exists() ? userDoc : null
     }
 
-    getProjectCollection(){
+    getProjectCollection() {
         return collection(db, "user", this.docId, "projects")
+    }
+    getTaskCollection(projectId) {
+        return collection(db, "user", this.docId, "projects", projectId, "tasks")
     }
 
     getDisplayName(){
@@ -55,26 +58,7 @@ export default class UserProfile {
         Other Functions
     */
 
-    async loadProjects(){
-        const projectSnaps = await getDocs(this.getProjectCollection());
-        var loadedProjects = []
-
-        projectSnaps.forEach(project => {
-            loadedProjects.push(new Project(
-                project.id,
-                project.data().name,
-                project.data().isCompleted,
-                new Date(project.data().dateDue),
-                new Date(project.data().dateCreated),
-                project.data().description,
-                [] // need to add task loading here
-            ))
-        });
-
-        this.projects = loadedProjects
-    }
-
-   async createNewProject(project){ // takes project class object as input
+    async createNewProject(project) { // takes project class object as input
 
         const projectsCollection = this.getProjectCollection()
         const projectDocRef = await addDoc(projectsCollection, project.getFirestoreData())
@@ -84,11 +68,16 @@ export default class UserProfile {
         this.projects.push(project)
 
         return projectDoc.exists() ? projectDoc : null
-   }
+    }
+    async createNewTask(project, task) { // takes project class object as input
 
-   containsProjectName(projectName){
-        const projectsFound = this.projects.filter(project => project.name == projectName)
+        const taskCollection = this.getTaskCollection(project.id)
+        const taskDocRef = await addDoc(taskCollection, task.getFirestoreData())
+        const taskDoc = await getDoc(taskDocRef)
 
-        return projectsFound[0] ? true : false
-   }
+        task.setDocId(taskDoc.id)
+        // this.projects.tasks.push(task) doesnt use project class object
+
+        return taskDoc.exists() ? taskDoc : null
+    }
 }

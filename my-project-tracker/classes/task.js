@@ -19,4 +19,21 @@ export default class Task {
         this.dateCreated = dateCreated ? dateCreated : new Date()
         this.description = description ? description : ""
     }
+
+    setDocId(newDocId) {
+        this.docId = newDocId;
+    }
+
+    getDocId() {
+        return this.docId;
+    }
+    getFirestoreData() {
+        return {
+            name: this.name,
+            description: this.description,
+            dateDue: this.dateDue.getTime(),
+            dateCreated: this.dateCreated.getTime(),
+            isCompleted: this.isCompleted,
+        }
+    }
 }
