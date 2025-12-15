@@ -48,9 +48,6 @@ export const columns: ColumnDef<Project>[] = [
 
     cell: ({ row }) => {
       const date = row.getValue("dateCreated");
-      if (date && typeof date === "object" && "seconds" in date) {
-        return new Date(date.seconds * 1000).toLocaleDateString();
-      }
       return new Date(date as string).toLocaleDateString();
     },
   },
@@ -60,9 +57,6 @@ export const columns: ColumnDef<Project>[] = [
 
     cell: ({ row }) => {
       const date = row.getValue("dateDue");
-      if (date && typeof date === "object" && "seconds" in date) {
-        return new Date(date.seconds * 1000).toLocaleDateString();
-      }
       return new Date(date as string).toLocaleDateString();
     },
   },
