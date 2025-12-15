@@ -61,66 +61,16 @@ export default function Login({ googleLogin, githubLogin, setSigningUp, email, s
     Main component
   */
   return (
-    <Card className="w-full max-w-lg justify-center">
+    <Card className="text-center w-full max-w-md justify-center">
 
       {/* Card header login information and signup button */}
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
-        <CardDescription>
-          Enter your email and password below
-        </CardDescription>
-        <CardAction>
-          <Button variant="link" onClick={handleSigningUp}>Sign Up</Button>
-        </CardAction>
+        <CardTitle>Login/Create account</CardTitle>
       </CardHeader>
-
-      {/* Card content for email and password login */}
-      <CardContent>
-        <form>
-          <div className="flex flex-col gap-6">
-
-            {/* Email container */}
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="example@example.com"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              />
-            </div>
-
-            {/* Password container */}
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <a
-                  href="#"
-                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                >
-                  Forgot your password?
-                </a>
-              </div>
-              <Input 
-                id="password" 
-                type="password" 
-                value={password}
-                onChange={handlePasswordChange}
-                required 
-              />
-            </div>
-          </div>
-        </form>
-      </CardContent>
 
       {/* Card footer login button and options to continue with gmail or github account */}
       <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-        <CardDescription>Or continue with...</CardDescription>
+        <CardDescription>Via Service Supported Provider</CardDescription>
         <div className="flex gap-2">
             
           {/* Gmail login image/button */}

@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/page.js", "app/dashboard/page.js"  ],
+, "app/page.js", "app/dashboard/page.js", "app/project/[docId]/task-columns.tsx"  ],
   "exclude": ["node_modules"]
 }
